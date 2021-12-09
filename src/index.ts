@@ -1,40 +1,20 @@
-const sequence : number[] = Array.from(Array(10).keys());
-const animals : string[] = ['passaro', 'gato', 'cachorro', 'coelho'];
-const stringsAndNumbers : any[] = [1, 'one', 2, 'two', 3, 'three'];
-//*************************************** */
-interface Book {
-  title: string;
-	author?: string;
- }
+//import http from 'http';
+import express from 'express';
+const app = express();
+app.use(express.json());
+/*const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type','text/plain');
+  res.end('Funcionou');
+});*/
 
-function addToLibrary(item: Book) {
-  const response = `Adicionado o livro ${item.title} à sua biblioteca.`;
-  console.log(response);
-}
-const book1: Book = {
-	title: 'Novo livro',
-	author: 'author 1'
-}
-console.log(addToLibrary(book1));
-//*************************************** */
-function cashAdd(money : Number, message?:String): any {
-  if (message === undefined){
-    return money  
-  } else {
-    return `Valor de R$ ${money} adicionado a conta ${message}.`;
-  }
-}
-console.log(cashAdd(144,'1'));
-//************************************** */
-function passValue(value: any): any {
-  return value;
-}
-console.log(passValue('String'));
-console.log(passValue(1));
-
-function passValue2<T>(value: T): T {
-  return value;
-}
-console.log(passValue2(<string>"generics"));
-//console.log(passValue2(<string> 1));
-
+const port = 5000;
+app.get('/', (req, res) => {
+  //res.sendStatus(300).json({
+    res.json({  
+      message: 'Servidor respondendo'
+  })
+});
+app.listen(port, () => {
+  console.log('Server funcionando na porta:', port);
+});
