@@ -1,20 +1,17 @@
-//import http from 'http';
 import express from 'express';
+import Mongoose from 'mongoose';
+import config from './config';
+
 const app = express();
 app.use(express.json());
-/*const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type','text/plain');
-  res.end('Funcionou');
-});*/
 
-const port = 5000;
 app.get('/', (req, res) => {
-  //res.sendStatus(300).json({ ---- Enviar status diferente do 200
-    res.json({  
-      message: 'Servidor respondendo'
+  res.json({
+    message: 'Servidor respondendo'
   })
 });
-app.listen(port, () => {
-  console.log('Server funcionando na porta:', port);
+
+app.listen(config.PORT, () => {
+  console.log('Server funcionando na porta:', config.PORT);
+  Mongoose.connect(config.MONGO_URI);
 });
