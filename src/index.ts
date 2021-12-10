@@ -10,7 +10,7 @@ app.use(express.json());
 
 const port = 5000;
 app.get('/', (req, res) => {
-  //res.sendStatus(300).json({
+  //res.sendStatus(300).json({ ---- Enviar status diferente do 200
     res.json({  
       message: 'Servidor respondendo'
   })
