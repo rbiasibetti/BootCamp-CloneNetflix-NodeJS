@@ -20,4 +20,4 @@ const ListSchema = new Schema({
   });
 
   const List = model<ListDocument>("List",ListSchema);
-  export { List };
+  export { List }; 
