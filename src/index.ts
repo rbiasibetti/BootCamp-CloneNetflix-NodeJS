@@ -1,15 +1,12 @@
 import express from 'express';
 import Mongoose from 'mongoose';
 import config from './config';
+import { apiRouter } from './routes/api.routes';
 
 const app = express();
 app.use(express.json());
+app.use(apiRouter);
 
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Servidor respondendo'
-  })
-});
 
 app.listen(config.PORT, () => {
   console.log('Server funcionando na porta:', config.PORT);
