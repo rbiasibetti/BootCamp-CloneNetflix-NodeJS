@@ -101,7 +101,7 @@ function writeToJson(array: Object[]) {
 
 async function bulkCreate(req: Request, res: Response) {
     const { filePath } = req.body;
-
+    return res.status(500).json('');
     const array = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
     const movies = await Movie.insertMany(array).catch(error => {
