@@ -65,7 +65,7 @@ function createAccessToken(userId: string) {
         },
         token,
         {
-            expiresIn: 900 // 15min
+            expiresIn: 86400  
         }
     );
 
