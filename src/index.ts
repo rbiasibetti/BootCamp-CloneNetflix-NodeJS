@@ -8,11 +8,16 @@ import { extRouter } from './routes/external.routes';
 dotenv.config();
 
 const app = express();
-
+const allowedOrigins = ['http://localhost:3000'];
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+app.use(cors(options));
 app.use(express.json());
 app.use(apiRouter);
 app.use(extRouter);
-app.use(cors())
+//app.use(cors())
+
 
 const ENV_VARS = {
   port: process.env.PORT,
