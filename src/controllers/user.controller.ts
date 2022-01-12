@@ -28,31 +28,39 @@ async function view(req: Request, res: Response) {
 }
 
 async function create(req: Request, res: Response) {
-    const { name, email, password } = req.body;
+    try {
+        const { name, email, password } = req.body;
 
-    const userExists = await User.findOne({ email });
-
-    if (userExists) {
-        return res.status(403).json({
-            message: 'Usuário já cadastrado'
-        });
-    }
-
-    const user = new User({ name, email, password });
-
-    user.save((error: any, result: any): void => {
-        if (error) {
-            console.log('Error: ', typeof error);
-            res.json(error);
+        const userExists = await User.findOne({ email });
+    
+        if (userExists) {
+            return res.status(403).json({
+                message: 'Usuário já cadastrado'
+            });
         }
-
-        res.status(201).json(
+    
+        const user = new User({ name, email, password });
+    
+        user.save((error: any, result: any): void => {
+            if (error) {
+                console.log('Error: ', typeof error);
+                res.json(error);
+            }
+    
+            res.status(201).json(
+                {
+                    id: result._id,
+                    name: result.name
+                }
+            );
+        });
+    } catch (error) {
+        return res.status(400).json(
             {
-                id: result._id,
-                name: result.name
+                status: error
             }
         );
-    });
+    }
 }
 
 async function destroy(req: Request, res: Response) {
